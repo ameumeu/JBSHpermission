@@ -11,10 +11,11 @@
             <div class="nav-name">
                 <p>{{ user.name }}</p>
             </div>
-            <a href="{% url 'account:change_pw' %}">비밀번호 변경</a>
-            <a href="{% url 'account:logout' %}">로그아웃</a>
+            <a href="{% url 'permission:change_pw' %}">비밀번호 변경</a>
+            <a href="{% url 'permission:logout' %}">로그아웃</a>
         {% else %}
-        <form action="{% url 'account:login' %}" method="post">
+        <form method="post">
+        <form method="post">
             {% csrf_token %}
             <div class="input-login">
                 <label for="username">학번</label>
