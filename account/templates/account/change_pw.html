@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="error_message">
+        {{ error }}
+    </div>
+    <form action="{% url 'account:change_pw' %}" method="post">
+        {% csrf_token %}
+        <div class="input-login">
+            <label for="password">현재 비밀번호</label>
+            <input type="password" id="old_password" name="old)password" required value="{{ form.old_password.value|default_if_none:'' }}">
+        </div>
+        <div class="input-login">
+            <label for="password">새 비밀번호</label>
+            <input type="password" id="password1" name="password1" required value="{{ form.password1.value|default_if_none:'' }}">
+        </div>
+        <div class="input-login">
+            <label for="password">새 비밀번호 확인</label>
+            <input type="password" id="password2" name="password2" required value="{{ form.password2.value|default_if_none:'' }}">
+        </div>
+        <button type="submit" class="btn btn-login">비밀번호 변경</button>
+    </form>
+</body>
+</html>
