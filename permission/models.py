@@ -13,3 +13,8 @@ class Permission(models.Model):
     is_permitted = models.BooleanField(default=False)
     representative =  models.IntegerField()
     advisor = models.CharField(max_length=35)
+
+class Place(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=10)
+    headcount = models.IntegerField(default=0)
