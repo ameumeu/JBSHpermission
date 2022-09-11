@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="nav-bar" class="nav-bar">
+        {% if user.is_authenticated %}
+            <div class="nav-name">
+                <p>{{ user.name }}</p>
+            </div>
+            <a href="{% url 'portal:change_pw' %}">비밀번호 변경</a>
+            <a href="{% url 'portal:logout' %}">로그아웃</a>
+        {% else %}
+        <form method="post">
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-login">
+                <label for="username">학번</label>
+                <input type="text" id="username" name="username" required  value="{{ form.username.value|default_if_none:'' }}">
+            </div>
+            <div class="input-login">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" required value="{{ form.password.value|default_if_none:'' }}">
+            </div>
+            {% if error %}
+            <div class="err_message">
+                <p>{{error}}</p>
+            </div>
+            {% endif %}
+            <button type="submit" class="btn btn-login">로그인</button>
+        </form> 
+        {% endif %}
+    </div>
+    <p>O HAI!</p>
+    <div>
+        <a href="{% url 'permission:index' %}">허가원</a>
+    </div>
+</body>
+</html>

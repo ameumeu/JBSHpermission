@@ -4,37 +4,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'permission/style.css' %}">
 </head>
 <body>
-    <div id="nav-bar" class="nav-bar">
-        {% if user.is_authenticated %}
-            <div class="nav-name">
-                <p>{{ user.name }}</p>
-            </div>
-            <a href="{% url 'permission:change_pw' %}">비밀번호 변경</a>
-            <a href="{% url 'permission:logout' %}">로그아웃</a>
-        {% else %}
-        <form method="post">
-        <form method="post">
-            {% csrf_token %}
-            <div class="input-login">
-                <label for="username">학번</label>
-                <input type="text" id="username" name="username" required  value="{{ form.username.value|default_if_none:'' }}">
-            </div>
-            <div class="input-login">
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" required value="{{ form.password.value|default_if_none:'' }}">
-            </div>
-            {% if error %}
-            <div class="err_message">
-                <p>{{error}}</p>
-            </div>
-            {% endif %}
-            <button type="submit" class="btn btn-login">로그인</button>
-        </form> 
-        {% endif %}
+    <div id="studentID">
+        <p>{{user.username}}{{user.last_name}}{{user.first_name}}</p>
     </div>
-
-    <p>O HAI!</p>
+    <table class="table-center">
+        <tr>
+            <th class="center index-cell">활동명</th>
+            <th class="center index-cell">대표자</th>
+            <th class="center index-cell">교실</th>
+            <th class="center index-cell">허가 여부</th>
+        </tr>
+        {% for content in permission_list %}
+        <tr>
+            <td class="center index-cell">{{content.activity}}</td>
+            <td class="center index-cell">{{content.representative}}</td>
+            <td class="center index-cell">{{content.classroom}}</td>
+            <td class="center index-cell">
+                {% if content.is_permitted %}
+                    <img src="{% static 'permission/img/accept.png' %}" class="accepted" alt="accepted" width="10" height="10">
+                {% else %}
+                    <img src="{% static 'permission/img/rec.png' %}" class="accepted" alt="not accepted" width="10" height="10">
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="https://www.flaticon.com/free-icons/rec" title="rec icons">Rec icons created by Freepik - Flaticon</a>
+    <a href="https://www.flaticon.com/free-icons/correct" title="correct icons">Correct icons created by Aldo Cervantes - Flaticon</a>
 </body>
 </html>

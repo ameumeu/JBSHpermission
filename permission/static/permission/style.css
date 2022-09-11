@@ -1,0 +1,13 @@
+.table-center{
+    margin-left: auto;
+  margin-right: auto;
+}
+
+.center{
+    text-align: center;
+}
+
+.index-cell {
+    padding-left: 15px;
+    padding-right: 15px;
+}
