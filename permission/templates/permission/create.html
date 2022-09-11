@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="nav-bar">
+        {% if user.is_authenticated %}
+        <div id="studentID">
+            <p>{{user.username}}{{user.last_name}}{{user.first_name}}</p>
+        </div>
+        {% endif %}
+        <a href="{% url 'permission:index' %}" >허가원으로</a>
+        <a href="{% url 'portal:index' %}" >메인화면으로</a>
+    </div>
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <div>
+            <label name="label_activity" for="activity">활동명(10자 이내)</label>
+            <input name="activity" type="text"/>
+        </div>
+        <div>
+            <label name="label_activity_detail" for="activity_detail">활동내용(20자 이내)</label>
+            <input name="activity_detail" type="text"/>
+        </div>
+        <div>
+            <label name="label_place" for="place">장소</label>
+            <div id="place-picker">
+                {% for place in place_list %}
+                <div class="place-radio">
+                    <input name="place" type="radio" value={{place.id}}/>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <label name="label_participants" for="participants">참가자</label>
+            <input name="participants" type="text"/>
+        </div>
+        <div>
+            <label name="label_period_1" for="period_1">1교시</label>
+            <input name="period_1" type="checkbox"/>
+        </div>
+        <div>
+            <label name="label_period_2" for="period_2">2교시</label>
+            <input name="period_2" type="checkbox"/>
+        </div>
+        <div>
+            <label name="label_representative" for="representative">대표자 학번(미입력시 개설자)</label>
+            <input name="representative" type="text"/>
+        </div>
+        <div>
+            <label name="label_advisor" for="advisor">지도교사</label>
+            <input name="advisor" type="text"/>
+        </div>
+        <button type="submit" class="btn btn-login">허가원 개설</button>
+    </form>
+</body>
+</html>

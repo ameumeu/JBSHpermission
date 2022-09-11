@@ -6,6 +6,14 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="nav-bar">
+        {% if user.is_authenticated %}
+        <div id="studentID">
+            <p>{{user.username}}{{user.last_name}}{{user.first_name}}</p>
+        </div>
+        {% endif %}
+        <a href="{% url 'portal:index' %}" >메인화면으로</a>
+    </div>
     <p>비밀번호가 변경되어도 메시지가 나타나지 않습니다.</p>
     <form method="POST" novalidate>
     {% csrf_token %}
@@ -68,9 +76,8 @@
         <small>
             최소 8개의 숫자와 문자 또는 특수기호를 입력해주세요.
         </small>
-        <button type="submit" class="btn btn-login">비밀번호 변경</button>
     </div>
-    <a href="{% url 'permission:index' %}">메인화면으로</a>
+    <button type="submit" class="btn btn-login">비밀번호 변경</button>
 </form>
 </body>
 </html>

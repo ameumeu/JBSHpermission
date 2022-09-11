@@ -9,7 +9,7 @@
     <div id="nav-bar" class="nav-bar">
         {% if user.is_authenticated %}
             <div class="nav-name">
-                <p>{{ user.name }}</p>
+                <p>{{user.username}}{{user.last_name}}{{user.first_name}}</p>
             </div>
             <a href="{% url 'portal:change_pw' %}">비밀번호 변경</a>
             <a href="{% url 'portal:logout' %}">로그아웃</a>
