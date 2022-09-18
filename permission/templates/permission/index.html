@@ -5,43 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'permission/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'permission/style.css' %}">
 </head>
 <body>
-    <div id="nav-bar">
-        {% if user.is_authenticated %}
-        <div id="studentID">
-            <p>{{user.username}}{{user.last_name}}{{user.first_name}}</p>
+    <div class="grid-container">
+        <div id="nav-bar">
+            <a href="{% url 'portal:index' %}" ><span>메인화면으로</span></a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'permission:create' %}"><span>허가원 개설하기</span></a>
+            <span id="studentID">
+                {{user.username}}<!--{{user.last_name}}{{user.first_name}}-->
+            </span>
+            {% endif %}  
         </div>
-        <a href="{% url 'permission:create' %}">허가원 개설하기</a>
-        {% endif %}
-        <a href="{% url 'portal:index' %}" >메인화면으로</a>
-    </div>
-    <table class="table-center">
-        <tr>
-            <th class="center index-cell">활동명</th>
-            <th class="center index-cell">대표자</th>
-            <th class="center index-cell">교실</th>
-            <th class="center index-cell">허가 여부</th>
-        </tr>
-        {% for content in permission_list %}
-        <a href="{% url 'permission:detail'  %}" >
+        <table class="table-center">
             <tr>
-                <td class="center index-cell">{{content.activity}}</td>
-                <td class="center index-cell">{{content.representative}}</td>
-                <td class="center index-cell">{{content.classroom}}</td>
-                <td class="center index-cell">
-                    {% if content.is_permitted %}
-                        <img src="{% static 'permission/img/accept.png' %}" class="accepted" alt="accepted" width="10" height="10">
-                    {% else %}
-                        <img src="{% static 'permission/img/rec.png' %}" class="accepted" alt="not accepted" width="10" height="10">
-                    {% endif %}
-                </td>
+                <th class="center index-cell">활동명</th>
+                <th class="center index-cell">대표자</th>
+                <th class="center index-cell">교실</th>
+                <th class="center index-cell">허가 여부</th>
             </tr>
-        </a>
-        {% endfor %}
-    </table>
-    <a href="https://www.flaticon.com/free-icons/rec" title="rec icons">Rec icons created by Freepik - Flaticon</a>
-    <a href="https://www.flaticon.com/free-icons/correct" title="correct icons">Correct icons created by Aldo Cervantes - Flaticon</a>
+            {% for content in permission_list %}
+            <!--<a href="{% url 'permission:detail'  %}" >-->
+                <tr>
+                    <td class="center index-cell">{{content.activity}}</td>
+                    <td class="center index-cell">{{content.representative}}</td>
+                    <td class="center index-cell">{{content.place}}</td>
+                    <td class="center index-cell">
+                        {% if content.is_permitted %}
+                            <img src="{% static 'permission/img/accept.png' %}" class="accepted" alt="accepted" width="10" height="10">
+                        {% else %}
+                            <img src="{% static 'permission/img/rec.png' %}" class="accepted" alt="not accepted" width="10" height="10">
+                        {% endif %}
+                    </td>
+                </tr>
+            <!--</a>-->
+            {% endfor %}
+        </table>
+        <div id="footer">
+            <a href="https://www.flaticon.com/free-icons/rec" title="rec icons">Rec icons created by Freepik - Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/correct" title="correct icons">Correct icons created by Aldo Cervantes - Flaticon</a>
+        </div>
+    </div>
+
 </body>
 </html>
